@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { MdDone, MdDelete } from 'react-icons/md';
 import { RiArrowDropDownFill, RiArrowDropUpFill } from 'react-icons/ri';
-import { useTodoDispatch } from './TodoContext';
+import { useTodoContext } from './TodoContext';
 // Styled Components
 
 const ItemHeader = styled.div`
@@ -124,7 +124,7 @@ const TodoItemBlock = styled.div`
 `;
 
 const TodoItem = ({ id, done, details, title, dropEvent }) => {
-  const dispatch = useTodoDispatch();
+  const useTodo = useTodoContext();
 
   // Drop Down Event 에 다른 아이콘 변경을 위한 State
   const [isDrop, setIsDrop] = useState(false);
@@ -151,17 +151,17 @@ const TodoItem = ({ id, done, details, title, dropEvent }) => {
 
   const onAction = (type) => {
     if (type === 'Toggle') {
-      dispatch({
+      useTodo.dispatch({
         type: type,
         id,
       });
     } else if (type === 'Remove') {
-      dispatch({
+      useTodo.dispatch({
         type: type,
         id,
       });
     } else if (type === 'Drop') {
-      dispatch({
+      useTodo.dispatch({
         type: type,
         id,
       });

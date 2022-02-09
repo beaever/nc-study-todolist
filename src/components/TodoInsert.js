@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { MdAdd } from 'react-icons/md';
-import { useTodoDispatch, useTodoNextId } from './TodoContext';
+import { useTodoContext } from './TodoContext';
 import _ from 'lodash';
 
 const CircleButton = styled.button`
@@ -95,8 +95,8 @@ const InputSubmitButtonHidden = styled.input`
 
 const TodoInsert = () => {
   // Context API
-  const dispatch = useTodoDispatch();
-  const nextId = useTodoNextId(); // 다음에 생성될 객체의 ID
+  const useTodo = useTodoContext();
+  const nextId = useTodo.nextId(); // 다음에 생성될 객체의 ID
 
   // useState 상태값 변환
   const [on, setOn] = useState(false);
@@ -110,7 +110,7 @@ const TodoInsert = () => {
   const onClickSubmit = (e) => {
     e.preventDefault();
     if (!_.isEmpty(todoInsertTitleValue) && !_.isEmpty(todoInsertDetailValue)) {
-      dispatch({
+      useTodo.dispatch({
         type: 'Create',
         todo: {
           id: nextId.current + 1,

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useTodoState } from './TodoContext';
+import { useTodoContext } from './TodoContext';
 
 const TodoHeaderBlock = styled.div`
   padding: 48px 32px 24px 32px;
@@ -49,8 +49,8 @@ const TodoHeader = () => {
     weekday: 'long',
   });
 
-  const todos = useTodoState();
-  const undoneTasks = todos.filter((todo) => !todo.done);
+  const useTodo = useTodoContext();
+  const undoneTasks = useTodo.state.filter((todo) => !todo.done);
 
   return (
     <TodoHeaderBlock>

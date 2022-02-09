@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useTodoState } from './TodoContext';
+import { useTodoContext } from './TodoContext';
 import TodoItem from './TodoItem';
 
 const TodoListBlock = styled.div`
@@ -15,10 +15,10 @@ const TodoListBlock = styled.div`
 `;
 
 const TodoList = () => {
-  const todoList = useTodoState(); // TodoContext 안에 만들어 두었던 Custom Hooks를 사용
+  const useTodo = useTodoContext(); // TodoContext 안에 만들어 두었던 Custom Hooks를 사용
   return (
     <TodoListBlock>
-      {todoList.map((item) => {
+      {useTodo.state.map((item) => {
         return (
           <TodoItem
             key={item.id}

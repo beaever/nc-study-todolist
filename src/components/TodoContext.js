@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useRef } from 'react';
+import React, { createContext, useContext, useReducer } from 'react';
 
 const initalTodos = [
   {
@@ -58,42 +58,23 @@ const todoReducer = (state, action) => {
   }
 };
 
-const TodoStateContext = createContext();
-const TodoDispatchContext = createContext();
-const TodoNextIdContext = createContext();
+const TodoContext = createContext();
 
 export const TodoProvider = ({ children }) => {
   const [state, dispatch] = useReducer(todoReducer, initalTodos);
-  const nextId = useRef(5);
+  const nextId = () =>  initalTodos.length === 0 ? 1 : initalTodos[initalTodos.length-1].id;  //다음 아이디 가져오기
+
+  //프로바이더 벨류 합치기
   return (
-    <TodoStateContext.Provider value={state}>
-      <TodoDispatchContext.Provider value={dispatch}>
-        <TodoNextIdContext.Provider value={nextId}>
+    <TodoContext.Provider value={{state, dispatch, nextId}}>
           {children}
-        </TodoNextIdContext.Provider>
-      </TodoDispatchContext.Provider>
-    </TodoStateContext.Provider>
+    </TodoContext.Provider>
   );
 };
 
 // Custom Hooks
-// 컴포넌트 최적화를 위해 따로따로 만들었음.
-export const useTodoState = () => {
-  const context = useContext(TodoStateContext);
-  if (!context) {
-    throw new Error('Can not Find Provider');
-  }
-  return context;
-};
-export const useTodoDispatch = () => {
-  const context = useContext(TodoDispatchContext);
-  if (!context) {
-    throw new Error('Can not Find Provider');
-  }
-  return context;
-};
-export const useTodoNextId = () => {
-  const context = useContext(TodoNextIdContext);
+export const useTodoContext = () => {
+  const context = useContext(TodoContext);
   if (!context) {
     throw new Error('Can not Find Provider');
   }
