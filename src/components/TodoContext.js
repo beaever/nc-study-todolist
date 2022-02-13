@@ -3,39 +3,40 @@ import React, { createContext, useContext, useReducer } from 'react';
 const initalTodos = [
   {
     id: 1,
-    title: '프로젝트 생성하기??',
+    title: '프로젝트 생성하기',
     dropEvent: false,
     done: true,
     detail:
-      '디테일입니다.디테일입니다.디테일입니다.디테일입니다.디테일입니다.디테일입니다.디테일입니다.디테일입니다.디테일입니다.디테일입니다.디테일입니다.디테일입니다.디테일입니다.디테일입니다.디테일입니다.디테일입니다.디테일입니다.디테일입니다.디테일입니다.디테일입니다.디테일입니다.디테일입니다.디테일입니다.디테일입니다.디테일입니다.디테일입니다.디테일입니다.디테일입니다.디테일입니다.디테일입니다.',
+      '프로젝트 생성하기 상세 입니다. 프로젝트 생성하기 상세 입니다. 프로젝트 생성하기 상세 입니다. 프로젝트 생성하기 상세 입니다. 프로젝트 생성하기 상세 입니다. 프로젝트 생성하기 상세 입니다. 프로젝트 생성하기 상세 입니다. 프로젝트 생성하기 상세 입니다. 프로젝트 생성하기 상세 입니다. 프로젝트 생성하기 상세 입니다. ',
   },
   {
     id: 2,
     title: 'TodoList 작성하기',
     dropEvent: false,
     done: false,
-    detail: '디테일입니다.',
+    detail:
+      'TodoList 작성하기 상세 입니다. TodoList 작성하기 상세 입니다. TodoList 작성하기 상세 입니다. TodoList 작성하기 상세 입니다. TodoList 작성하기 상세 입니다. TodoList 작성하기 상세 입니다. TodoList 작성하기 상세 입니다. TodoList 작성하기 상세 입니다. TodoList 작성하기 상세 입니다. ',
   },
   {
     id: 3,
-    title: '프로젝트 생성하기',
+    title: '과제 작업하기',
     dropEvent: false,
     done: true,
-    detail: '디테일입니다.',
+    detail: '과제 작업하기 상세 입니다.',
   },
   {
     id: 4,
-    title: '프로젝트 생성하기',
+    title: 'GraphQL 공부 하기',
     dropEvent: false,
     done: false,
-    detail: '디테일입니다.',
+    detail: 'GraphQL 공부하기 상세',
   },
   {
     id: 5,
-    title: '프로젝트 생성하기',
+    title: '오늘 하루에 작업 완료 하기',
     dropEvent: false,
     done: true,
-    detail: '디테일입니다.',
+    detail: '작업 완료하기.',
   },
 ];
 // Creact, Toggle, Remove 의 Event를 감지 합니다.
@@ -62,12 +63,13 @@ const TodoContext = createContext();
 
 export const TodoProvider = ({ children }) => {
   const [state, dispatch] = useReducer(todoReducer, initalTodos);
-  const nextId = () =>  initalTodos.length === 0 ? 1 : initalTodos[initalTodos.length-1].id;  //다음 아이디 가져오기
+  const nextId = () =>
+    initalTodos.length === 0 ? 1 : initalTodos[initalTodos.length - 1].id; //다음 아이디 가져오기
 
   //프로바이더 벨류 합치기
   return (
-    <TodoContext.Provider value={{state, dispatch, nextId}}>
-          {children}
+    <TodoContext.Provider value={{ state, dispatch, nextId }}>
+      {children}
     </TodoContext.Provider>
   );
 };

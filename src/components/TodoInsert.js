@@ -74,7 +74,7 @@ const InputTitle = styled.input`
   }
 `;
 
-const InputDetail = styled.input`
+const InputDetail = styled.textarea`
   padding: 12px;
   border-radius: 4px;
   border: 1px solid #dee2e6;
@@ -151,6 +151,10 @@ const TodoInsert = () => {
               autoFocus
               value={todoInsertDetailValue}
               onChange={(e) => setTodoInsertDetailValue(e.currentTarget.value)}
+              onKeyDown={(e) => {
+                console.log('???');
+              }}
+              className='inputDetailTextarea'
             />
             <InputSubmitButtonHidden type='submit' />
           </InsertForm>
